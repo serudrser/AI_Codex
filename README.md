@@ -2,7 +2,7 @@
 
 ## Agenda Console App
 
-This repository now includes a small .NET 7 console application that helps you build an agenda from the terminal.
+This repository now includes a small .NET 8 console application that helps you build an agenda from the terminal.
 
 ### Running the application
 

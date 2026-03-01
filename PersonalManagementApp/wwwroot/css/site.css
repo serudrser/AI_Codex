@@ -1,0 +1,21 @@
+body {
+    background: #f7f8fb;
+}
+
+.card-metric {
+    border: none;
+    border-left: 4px solid #0d6efd;
+}
+
+.priority-high {
+    color: #b00020;
+    font-weight: 600;
+}
+
+.priority-medium {
+    color: #d97706;
+}
+
+.priority-low {
+    color: #2563eb;
+}

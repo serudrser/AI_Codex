@@ -1,0 +1,17 @@
+@model Contact
+@{
+    ViewData["Title"] = "Edit Contact";
+}
+
+<h1>Edit Contact</h1>
+<form asp-action="Edit" method="post" class="card p-4 shadow-sm bg-white">
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3"><label asp-for="FullName" class="form-label"></label><input asp-for="FullName" class="form-control" /><span asp-validation-for="FullName" class="text-danger"></span></div>
+    <div class="row g-3">
+        <div class="col-md-6"><label asp-for="Email" class="form-label"></label><input asp-for="Email" class="form-control" /></div>
+        <div class="col-md-6"><label asp-for="PhoneNumber" class="form-label"></label><input asp-for="PhoneNumber" class="form-control" /></div>
+    </div>
+    <div class="mt-3"><label asp-for="Company" class="form-label"></label><input asp-for="Company" class="form-control" /></div>
+    <div class="mt-3"><label asp-for="Notes" class="form-label"></label><textarea asp-for="Notes" class="form-control"></textarea></div>
+    <div class="mt-4 d-flex gap-2"><button class="btn btn-primary" type="submit">Update</button><a class="btn btn-outline-secondary" asp-action="Index">Cancel</a></div>
+</form>

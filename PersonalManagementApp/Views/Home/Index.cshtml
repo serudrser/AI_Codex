@@ -1,0 +1,82 @@
+@model DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="mb-1">Dashboard</h1>
+        <p class="text-muted mb-0">Track tasks and important contacts in one place.</p>
+    </div>
+    <div>
+        <a class="btn btn-primary" asp-controller="Tasks" asp-action="Create">+ New Task</a>
+        <a class="btn btn-outline-secondary" asp-controller="Contacts" asp-action="Create">+ New Contact</a>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card card-metric shadow-sm"><div class="card-body"><div class="text-muted">Total Tasks</div><div class="display-6">@Model.TotalTasks</div></div></div>
+    </div>
+    <div class="col-md-3">
+        <div class="card card-metric shadow-sm"><div class="card-body"><div class="text-muted">Open Tasks</div><div class="display-6">@Model.OpenTasks</div></div></div>
+    </div>
+    <div class="col-md-3">
+        <div class="card card-metric shadow-sm"><div class="card-body"><div class="text-muted">Completed</div><div class="display-6">@Model.CompletedTasks</div></div></div>
+    </div>
+    <div class="col-md-3">
+        <div class="card card-metric shadow-sm"><div class="card-body"><div class="text-muted">Contacts</div><div class="display-6">@Model.TotalContacts</div></div></div>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="card shadow-sm">
+            <div class="card-header bg-white"><h5 class="mb-0">Upcoming Tasks</h5></div>
+            <div class="card-body p-0">
+                <table class="table mb-0">
+                    <thead><tr><th>Title</th><th>Due</th><th>Priority</th><th></th></tr></thead>
+                    <tbody>
+                    @if (!Model.UpcomingTasks.Any())
+                    {
+                        <tr><td colspan="4" class="text-center text-muted py-4">No open tasks. Great job!</td></tr>
+                    }
+                    else
+                    {
+                        @foreach (var task in Model.UpcomingTasks)
+                        {
+                            <tr>
+                                <td>@task.Title</td>
+                                <td>@(task.DueDate?.ToString("yyyy-MM-dd") ?? "-")</td>
+                                <td class="priority-@task.Priority.ToString().ToLowerInvariant()">@task.Priority</td>
+                                <td><a class="btn btn-sm btn-outline-primary" asp-controller="Tasks" asp-action="Edit" asp-route-id="@task.Id">Edit</a></td>
+                            </tr>
+                        }
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-white"><h5 class="mb-0">Recent Contacts</h5></div>
+            <ul class="list-group list-group-flush">
+                @if (!Model.RecentContacts.Any())
+                {
+                    <li class="list-group-item text-muted">No contacts added yet.</li>
+                }
+                else
+                {
+                    @foreach (var contact in Model.RecentContacts)
+                    {
+                        <li class="list-group-item">
+                            <strong>@contact.FullName</strong><br />
+                            <span class="text-muted">@contact.Email</span>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+</div>
